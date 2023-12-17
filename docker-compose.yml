@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: python wplanner.py  # Use your actual filename
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app  # Adjust the volume path to match your project directory
+    links:
+      - db
+  db:
+    image: mongo:4.4  # Use the desired MongoDB version
+    hostname: "wplanner_mongodb"  # Set the hostname as needed

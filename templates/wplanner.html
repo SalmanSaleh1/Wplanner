@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}WPlanner{% endblock %}
+
+{% block body %}
+    <div class="mt-5">
+        <!-- WPlanner Form -->
+        <form id="planForm" method="post" class="mt-3">
+            <div class="form-row">
+                <!-- Date Input -->
+                <div class="col">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" class="form-control" required>
+                </div>
+
+                <!-- Description Input -->
+                <div class="col">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" class="form-control">
+                </div>
+
+                <!-- Place Dropdown -->
+                <div class="col">
+                    <label for="place">Place:</label>
+                    <select id="place" name="place" class="form-control" required>
+                        <option value="Riyadh">Riyadh</option>
+                        <option value="Jeddah">Jeddah</option>
+                        <option value="Mecca">Mecca</option>
+                        <option value="Medina">Medina</option>
+                        <option value="Dammam">Dammam</option>
+                        <option value="Sulțānah">Sulțānah</option>
+                        <option value="Tabuk">Tabuk</option>
+                        <option value="Buraydah">Buraydah</option>
+                        <option value="Al Mubarraz">Al Mubarraz</option>
+                        <option value="Ta’if">Ta’if</option>
+                        <option value="Najran">Najran</option>
+                        <option value="Al Kharj">Al Kharj</option>
+                        <option value="Abha">Abha</option>
+                        <option value="Yanbu">Yanbu</option>
+                        <option value="Khamis Mushait">Khamis Mushait</option>
+                        <option value="Al Hufūf">Al Hufūf</option>
+                        <option value="Hafar Al-Batin">Hafar Al-Batin</option>
+                        <option value="Ha'il">Ha'il</option>
+                        <option value="Ar Rass">Ar Rass</option>
+                        <option value="Al Jubayl">Al Jubayl</option>
+                    </select>
+                </div>
+
+                <!-- Add Plan Button -->
+                <div class="col">
+                    <button id="addPlanBtn" type="submit" class="btn btn-primary">Add Plan</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Weather Information Display -->
+        <div id="weatherInfo" class="mt-3" style="border: 1px solid #ccc; padding: 15px; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+            <!-- Content will be dynamically added here -->
+        </div>
+
+        <!-- Alert Message Container -->
+        <div class="alert alert-dismissible fade" role="alert" id="alertMessage">
+            <strong></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!-- Content Display -->
+        <div id="content" class="mt-4">
+            <!-- Plans Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Place</th>
+                        <th>Weather Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for plan in plans %}
+                        <tr>
+                            <td>{{ plan.date }}</td>
+                            <td>{{ plan.description }}</td>
+                            <td>{{ plan.place }}</td>
+                            <td>
+                                <!-- Weather Information for each plan -->
+                                <strong><i class="fas fa-thermometer-half"></i> Temperature:</strong>
+                                {{ plan.weather_info.temperature_2m|round(2) }}°C<br>
+                                <strong><i class="fas fa-wind"></i> Wind Speed:</strong>
+                                {{ plan.weather_info.wind_speed_10m|round(2) }}m/s<br>
+                                <strong><i class="fas fa-cloud"></i> Cloud Cover:</strong>
+                                {{ plan.weather_info.cloud_cover|round(2) }}%
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- AJAX Script for Form Submission -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Disable the "Add Plan" button initially
+            $('#addPlanBtn').prop('disabled', true);
+
+            // Event listener for date and place change
+            $('#date, #place').change(function() {
+                // Get form data
+                var formData = $('#planForm').serialize();
+
+                // Make an immediate AJAX request to fetch weather information
+                $.ajax({
+                    type: 'GET',
+                    url: '/get_weather_info',
+                    data: formData,
+                    success: function(response) {
+                        // Check the response status
+                        if (response.status === 'success') {
+                            // Display weather information immediately
+                            displayWeatherInfo(response.weather_info);
+
+                            // Enable the "Add Plan" button
+                            $('#addPlanBtn').prop('disabled', false);
+                        } else {
+                            // Handle other response statuses or error cases
+                            console.error('Unexpected response:', response);
+                        }
+                    },
+                    error: function(error) {
+                        // Handle AJAX errors
+                        console.error('AJAX error:', error);
+                    }
+                });
+            });
+
+            // Function to display weather information
+            function displayWeatherInfo(weatherInfo) {
+                // Update the content on the page with the fetched weather information
+                $('#weatherInfo').html(
+                    `<strong>Temperature:</strong> ${Math.round(weatherInfo.temperature_2m)}°C<br>` +
+                    `<strong>Wind Speed:</strong> ${Math.round(weatherInfo.wind_speed_10m)}m/s<br>` +
+                    `<strong>Cloud Cover:</strong> ${Math.round(weatherInfo.cloud_cover)}%`
+                );
+            }
+        });
+    </script>
+{% endblock %}

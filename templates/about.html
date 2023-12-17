@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}About WPlanner{% endblock %}
+
+{% block body %}
+    <!-- Main container -->
+    <div class="container mt-5">
+        <!-- Jumbotron for About WPlanner -->
+        <div class="jumbotron">
+            <h1 class="display-4">About WPlanner</h1>
+            <p class="lead">
+                <!-- Project description -->
+                This is the final project for the university course, encapsulating all concepts learned in class.
+                It serves as a practical application, demonstrating my skills and understanding.
+                Enjoy!
+            </p>
+            <hr class="my-4">
+            <p>
+                <!-- GitHub link -->
+                <a href="https://github.com/SalmanSaleh1" target="_blank" class="d-flex align-items-center">
+                    <img src="{{ url_for('static', filename='github.jpg') }}" alt="GitHub Logo" height="30" class="mr-2">
+                    GitHub
+                </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

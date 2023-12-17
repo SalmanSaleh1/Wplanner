@@ -1,0 +1,135 @@
+/* Reset some default styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f9fa; /* Light blue-gray background */
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* White container background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+}
+
+/* Heading styles */
+h2 {
+    color: #34495e; /* Dark blue-gray heading */
+}
+
+/* Form styles */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+/* Group styles for labels, inputs, and buttons */
+.label-group, .input-group, .button-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Label styles */
+label {
+    margin-bottom: 10px;
+    display: block;
+    width: 100%; /* Make the label take up the full width */
+    color: #2c3e50; /* Dark gray label text */
+}
+
+/* Input and select styles */
+input, select {
+    width: calc(50% - 15px);
+    padding: 12px; /* Increased padding for inputs */
+    box-sizing: border-box;
+    border: 1px solid #dcdde1; /* Light gray border */
+    border-radius: 6px; /* Slightly rounded borders */
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-right: 20px;
+}
+
+/* Button styles */
+button {
+    background-color: #2ecc71; /* Green button */
+    color: #ffffff; /* White button text */
+    cursor: pointer;
+    width: 100%;
+    height: 45px; /* Increased button height */
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    margin-top: 28px;
+}
+
+button:hover {
+    background-color: #27ae60; /* Darker green on hover */
+}
+
+/* Plan styles */
+.plan {
+    background-color: #ecf0f1; /* Light gray plan background */
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Weather info styles */
+.weather-info {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.weather-info p {
+    margin: 5px 0;
+    color: #555555; /* Dark gray text */
+}
+
+/* Navbar styles */
+.navbar-dark .navbar-nav .nav-item {
+    margin-right: 15px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    font-size: 20px;
+    color: #ffffff; /* White navbar text */
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #f39c12; /* Orange on hover */
+}
+
+/* Logo styles */
+.logo-img {
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Jumbotron styles */
+.jumbotron {
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Display styles for large headings */
+.display-4 {
+    color: #007bff; /* Bootstrap primary color for heading */
+}
+
+/* Lead paragraph styles */
+.lead {
+    font-size: 1.2rem;
+}
